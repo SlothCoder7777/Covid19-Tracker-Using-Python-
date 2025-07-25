@@ -1,0 +1,9 @@
+Django
+djangorestframework
+beautifulsoup4
+requests
+pandas
+numpy
+matplotlib
+plotly
+gunicorn

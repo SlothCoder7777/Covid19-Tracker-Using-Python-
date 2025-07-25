@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>COVID-19 Dashboard</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>COVID-19 Live Tracker</h1>
+  <form method="get">
+    <input type="text" name="q" placeholder="Search country..." value="{{ query }}">
+    <button type="submit">Search</button>
+  </form>
+  <table>
+    <thead>
+      <tr><th>Country</th><th>Total Cases</th><th>Deaths</th><th>Recovered</th></tr>
+    </thead>
+    <tbody>
+      {% for item in data %}
+      <tr>
+        <td>{{ item.country }}</td>
+        <td>{{ item.cases }}</td>
+        <td>{{ item.deaths }}</td>
+        <td>{{ item.recovered }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <h2>Top 10 Countries (Server-Side)</h2>
+  <div id="plotlyChart"></div>
+  <h2>Daily Trend (India)</h2>
+  <canvas id="trendChart"></canvas>
+  <script>
+    const top10 = {{ top10|safe }};
+  </script>
+  <script src="{% static 'scripts.js' %}"></script>
+</body>
+</html>
